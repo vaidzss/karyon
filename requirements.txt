@@ -10,3 +10,4 @@ playwright>=1.47.0
 python-multipart>=0.0.12
 pytest>=8.0.0
 anyio>=4.4.0
+aiosqlite>=0.20.0
