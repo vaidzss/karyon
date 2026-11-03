@@ -256,7 +256,9 @@ curl -X GET "{gateway_url}{sample_route}" \\
         }
     }
 
-@app.get("/api/health")
+@app.get("/health", tags=["Health"])
+@app.get("/healthz", tags=["Health"])
+@app.get("/api/health", tags=["Health"])
 async def root_health():
     provider_info = ai_router.get_active_provider_info()
     return {

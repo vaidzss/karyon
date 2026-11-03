@@ -46,7 +46,7 @@ class KaryonProxyMeshMiddleware(BaseHTTPMiddleware):
         path = request.url.path
 
         # Ignore static assets, docs, websockets, and internal control/simulator endpoints
-        if path.startswith(("/ws", "/docs", "/openapi.json", "/mesh/control", "/mesh/simulate-attack", "/api/simulator", "/api/system")):
+        if path.startswith(("/health", "/healthz", "/api/health", "/ws", "/docs", "/openapi.json", "/mesh/control", "/mesh/simulate-attack", "/api/simulator", "/api/system")):
             return await call_next(request)
 
         # 0. Check Protection Mode: Unprotected Raw Mode Bypass
