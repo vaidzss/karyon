@@ -1,12 +1,3 @@
----
-title: Karyon Autonomous AI Defense Plane
-emoji: 🛡️
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 7860
-pinned: true
----
 
 # Karyon: Autonomous Moving-Target AI Defense Plane & Context Firewall
 
