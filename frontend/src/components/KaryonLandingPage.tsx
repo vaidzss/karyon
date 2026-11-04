@@ -13,7 +13,8 @@ import {
   Activity,
   Code2,
   Menu,
-  X
+  X,
+  AlertTriangle
 } from 'lucide-react';
 
 interface KaryonLandingPageProps {
@@ -39,7 +40,7 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
   // Track active section for clean navbar highlighting
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['rings', 'architecture', 'threats', 'builders'];
+      const sections = ['black-october', 'rings', 'architecture', 'threats', 'builders'];
       const scrollPos = window.scrollY + 120;
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -116,6 +117,17 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
           {/* Center Navigation Links - Visible on lg+ (1024px+) to prevent tablet wrap */}
           <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 text-xs font-medium text-slate-600 whitespace-nowrap flex-1">
             <button
+              onClick={(e) => scrollToSection(e, 'black-october')}
+              className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
+                activeSection === 'black-october'
+                  ? 'text-rose-600 font-semibold bg-rose-50/80'
+                  : 'hover:text-slate-900 hover:bg-slate-100/70'
+              }`}
+            >
+              <AlertTriangle className="w-3.5 h-3.5 text-rose-500" />
+              <span>Black October</span>
+            </button>
+            <button
               onClick={(e) => scrollToSection(e, 'rings')}
               className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                 activeSection === 'rings'
@@ -123,7 +135,7 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
                   : 'hover:text-slate-900 hover:bg-slate-100/70'
               }`}
             >
-              4-Ring Defense
+              5-Ring Defense
             </button>
             <button
               onClick={(e) => scrollToSection(e, 'architecture')}
@@ -218,6 +230,22 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
                 {/* Navigation Links Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <button
+                    onClick={(e) => scrollToSection(e, 'black-october')}
+                    className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 text-left transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                        <AlertTriangle className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-slate-900">Black October</div>
+                        <div className="text-[11px] text-slate-500">2026 AI threat crisis briefing</div>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-rose-600 transition-colors" />
+                  </button>
+
+                  <button
                     onClick={(e) => scrollToSection(e, 'rings')}
                     className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 text-left transition-all cursor-pointer group"
                   >
@@ -226,7 +254,7 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
                         <Shield className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-slate-900">4-Ring Defense</div>
+                        <div className="text-sm font-semibold text-slate-900">5-Ring Defense</div>
                         <div className="text-[11px] text-slate-500">Autonomous protection topology</div>
                       </div>
                     </div>
@@ -425,7 +453,7 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
               className="w-full object-cover max-h-[460px]"
             />
             <div className="absolute bottom-4 left-6 px-3.5 py-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-xs text-white/90 font-medium">
-              FIG. 01 / ADAPTIVE DEFENSE FIELD · FOUR RINGS ONE DEFENSE PLANE
+              FIG. 01 / ADAPTIVE DEFENSE FIELD · FIVE RINGS ONE DEFENSE PLANE
             </div>
           </div>
         </motion.div>
@@ -479,7 +507,150 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
         </div>
       </section>
 
-      {/* 3. Section: WHAT WE DO (Asymmetric Bento Grid exactly matching Figma) */}
+      {/* 2.5. Section: THE BLACK OCTOBER CRISIS (Why Static 403 Firewalls Broke) */}
+      <section id="black-october" className="scroll-mt-16 sm:scroll-mt-20 py-24 px-6 max-w-7xl mx-auto w-full border-t border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold tracking-wide uppercase">
+              <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
+              <span>CRISIS BRIEFING · OCTOBER 2026</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Black October: The Day Static AI Firewalls Broke
+            </h2>
+          </div>
+          <p className="text-sm text-slate-600 max-w-lg leading-relaxed">
+            In October 2026, autonomous vision scrapers, stolen .env credentials, and multimodal prompt injections weaponized legitimate session tokens. Static 403 deny codes revealed perimeter boundaries—forcing the shift to moving-target AI defense.
+          </p>
+        </div>
+
+        {/* 3 Black October Threat Vectors Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Card 1: Supply Chain & Schema Replay */}
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-mono">
+                  CVE-2026-OCT-8821
+                </span>
+                <span className="text-[11px] font-semibold text-slate-400">VECTOR 01</span>
+              </div>
+              <h3 className="text-base font-bold text-slate-900">
+                Supply-Chain .env Leaks &amp; Schema Replay
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Adversaries weaponize leaked tokens from CI/CD artifacts to probe dormant API paths, executing BOLA account enumeration without triggering volume rate limiters.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+              <div className="flex items-center justify-between text-slate-500 text-[11px]">
+                <span>Static WAF:</span>
+                <span className="text-rose-600 font-semibold">403 Deny (Reveals Boundary)</span>
+              </div>
+              <div className="flex items-center justify-between text-slate-700 font-medium text-[11px]">
+                <span>Karyon Ring 2 + 5:</span>
+                <span className="text-emerald-700 font-semibold">60s Route Decay + AST Hot-Patch</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Zero-Day RCE Probe */}
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-mono">
+                  CVE-2026-OCT-4491
+                </span>
+                <span className="text-[11px] font-semibold text-slate-400">VECTOR 02</span>
+              </div>
+              <h3 className="text-base font-bold text-slate-900">
+                Unauthenticated RCE &amp; Polyglot Injection
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Novel command and SQL parameter injection probes bypass regex signatures by chaining multi-layer encodings against unauthenticated diagnostic handlers.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+              <div className="flex items-center justify-between text-slate-500 text-[11px]">
+                <span>Static WAF:</span>
+                <span className="text-rose-600 font-semibold">Vulnerable / Server Compromise</span>
+              </div>
+              <div className="flex items-center justify-between text-slate-700 font-medium text-[11px]">
+                <span>Karyon Ring 4 + 5:</span>
+                <span className="text-emerald-700 font-semibold">Decoy Maze + &lt;15ms Virtual Patch</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Poisoned Package Exfil */}
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between"
+          >
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-mono">
+                  CVE-2026-OCT-1204
+                </span>
+                <span className="text-[11px] font-semibold text-slate-400">VECTOR 03</span>
+              </div>
+              <h3 className="text-base font-bold text-slate-900">
+                Poisoned Package Context &amp; KV Exfiltration
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Compromised dependencies inject background system hooks during RAG context retrieval, attempting to exfiltrate GPU KV-cache activations and enterprise memory to rogue C2 nodes.
+              </p>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+              <div className="flex items-center justify-between text-slate-500 text-[11px]">
+                <span>Static WAF:</span>
+                <span className="text-rose-600 font-semibold">Context Contaminated</span>
+              </div>
+              <div className="flex items-center justify-between text-slate-700 font-medium text-[11px]">
+                <span>Karyon Ring 3:</span>
+                <span className="text-emerald-700 font-semibold">Merkle Eviction in &lt;2ms</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Paradigm Shift Banner */}
+        <div className="mt-8 p-6 sm:p-8 rounded-2xl bg-[#0F172A] text-white flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl border border-slate-800">
+          <div className="space-y-2 max-w-2xl">
+            <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 tracking-wider uppercase">
+              <Shield className="w-4 h-4 text-emerald-400" />
+              <span>THE MOVING-TARGET PARADIGM SHIFT</span>
+            </div>
+            <h4 className="text-lg font-bold text-white">
+              Denial teaches attackers your boundaries. Moving targets dissolve them.
+            </h4>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              When rogue agents possess legitimate API credentials and computer-use vision models, static perimeter walls are transparent. Karyon's 5 synchronized defense rings deceive rogue agents in synthetic realities while keeping real enterprise workflows 100% operational.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+            <button
+              onClick={onLaunchSoc}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#0866FF] hover:bg-[#0055D6] text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
+            >
+              <Activity className="w-4 h-4" />
+              <span>Launch Black October SOC</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Section: WHAT WE DO (5-Ring Moving-Target Defense Plane) */}
       <section id="rings" className="scroll-mt-16 sm:scroll-mt-20 py-24 px-6 max-w-7xl mx-auto w-full border-t border-slate-200">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="space-y-2">
@@ -487,11 +658,11 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
               WHAT WE DO
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Four rings. A defense that never stands still.
+              Five rings. A defense that never stands still.
             </h2>
           </div>
           <p className="text-sm text-slate-600 max-w-md">
-            A conceptual defense plane that adapts what agents see, where they go, and what they can carry into your AI.
+            A unified moving-target defense plane spanning optical perception, polymorphic schemas, GPU context surgery, synthetic deception, and autonomous AST virtual patching.
           </p>
         </div>
 
@@ -686,6 +857,134 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
             </motion.div>
           </div>
         </div>
+
+        {/* Full-Width Flagship Bento Card: Ring 5 Autonomous Virtual Patcher */}
+        <motion.div
+          whileHover={{ y: -3 }}
+          transition={{ duration: 0.2 }}
+          className="mt-6 p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-6"
+        >
+          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+            <div className="space-y-3 max-w-2xl">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  RING 05 · CLUSTER-WIDE IMMUNITY
+                </span>
+                <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-[#0866FF] border border-blue-100">
+                  SELF-HEALING EDGE
+                </span>
+                <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">
+                  Powered by Meta Muse Spark Open 1026
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900">
+                Ring 5 Autonomous Virtual Patcher &amp; Counter-Agent
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                When novel zero-day payloads are trapped in Ring 4's shadow honeypot, Ring 5 extracts AST grammar invariants using Meta Muse Spark. In under 15ms, it synthesizes dynamic inline filter rules, hot-loads them into the in-memory gateway with zero downtime, and triggers an immediate Ring 2 schema rotation—burning leaked routes cluster-wide.
+              </p>
+            </div>
+
+            {/* Quick Metrics Badge Group */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full lg:w-auto flex-shrink-0">
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Patch Latency</div>
+                <div className="text-base font-bold text-emerald-600 tnum">&lt; 15ms</div>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Downtime</div>
+                <div className="text-base font-bold text-slate-900 tnum">0.0s</div>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">F1 Accuracy</div>
+                <div className="text-base font-bold text-[#0866FF] tnum">99.4%</div>
+              </div>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+                <div className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">Canary Token</div>
+                <div className="text-base font-bold text-indigo-600 tnum">Active</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Visual Kill-Chain & AST Rule Synthesizer Console */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch pt-2">
+            {/* Left: 4-Stage Self-Healing Pipeline */}
+            <div className="lg:col-span-5 p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-3 flex flex-col justify-between">
+              <div className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                Autonomous Self-Healing Pipeline
+              </div>
+              <div className="space-y-2 text-xs">
+                <div className="p-2.5 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-md bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-[10px]">1</span>
+                    <span className="font-medium text-slate-800">Zero-Day Anomaly Ingested</span>
+                  </div>
+                  <span className="text-[10px] text-slate-500 font-mono">From Ring 4 Decoy</span>
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-md bg-blue-100 text-[#0866FF] flex items-center justify-center font-bold text-[10px]">2</span>
+                    <span className="font-medium text-slate-800">Meta Muse Spark AST Synthesis</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-600 font-semibold tnum">~12.4ms</span>
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">3</span>
+                    <span className="font-medium text-slate-800">Inline Gateway Hot-Loaded</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-600 font-semibold tnum">0.4ms</span>
+                </div>
+
+                <div className="p-2.5 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-md bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-[10px]">4</span>
+                    <span className="font-medium text-slate-800">Ring 2 Epoch Rotated &amp; Canaried</span>
+                  </div>
+                  <span className="text-[10px] text-purple-700 font-semibold">Immediate</span>
+                </div>
+              </div>
+
+              <div className="pt-1 text-[11px] text-slate-500 font-medium">
+                Enables cluster-wide immunity without restart cycles or cold re-deployments.
+              </div>
+            </div>
+
+            {/* Right: Live Synthesized AST Rule & Canary Preview */}
+            <div className="lg:col-span-7 p-5 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 space-y-3 flex flex-col justify-between">
+              <div className="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800 font-mono">
+                <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  RULE_SYNTHESIZER · ACTIVE_HOTLOADED
+                </span>
+                <span className="text-slate-500">ID: VP-2026-OCT-8821</span>
+              </div>
+
+              <pre className="text-xs font-mono text-emerald-300 leading-relaxed overflow-x-auto p-2.5 bg-slate-950/70 rounded-lg">
+                <code>{`// Dynamic AST & Regex Virtual Patch generated by Meta Muse Spark
+regex_signature: "(v[0-9]{1,3}_accounts_[a-z0-9]{4,12}|static_leaked_jwt)"
+ast_filter_rule: "ingress.route.epoch < cluster.active_epoch || request.auth.is_leaked"
+action_dispatch: SHUNT_TO_RING4(reason="BLACK_OCTOBER_EXPLOIT_ISOLATED")
+canary_token:    "CANARY-TK-` + String(activeEpoch).padStart(4, '0') + `" [Tracked across cluster]`}</code>
+              </pre>
+
+              <div className="flex items-center justify-between pt-2 text-xs">
+                <span className="text-slate-400">
+                  Target Vector: <strong className="text-white">Supply-Chain .env Replay</strong>
+                </span>
+                <button
+                  onClick={onLaunchSoc}
+                  className="text-xs font-semibold text-[#0866FF] hover:text-blue-400 flex items-center gap-1 cursor-pointer transition-colors"
+                >
+                  <span>Simulate patch in Command Center</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* 4. Section: THE ARCHITECTURE (Flow Diagram matching Figma) */}
@@ -737,23 +1036,34 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs">
-                  Ring 1: Optical Camouflage
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs flex items-center justify-between">
+                  <span>Ring 1: Optical Camouflage</span>
+                  <span className="text-[10px] text-[#0866FF] font-bold">Perception</span>
                 </div>
-                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs">
-                  Ring 2: Polymorphic API &amp; DB
+                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs flex items-center justify-between">
+                  <span>Ring 2: Polymorphic API &amp; DB</span>
+                  <span className="text-[10px] text-[#0866FF] font-bold">Surface</span>
                 </div>
-                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs">
-                  Ring 3: Surgical KV Firewall
+                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs flex items-center justify-between">
+                  <span>Ring 3: Surgical KV Firewall</span>
+                  <span className="text-[10px] text-[#0866FF] font-bold">Memory</span>
                 </div>
-                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs">
-                  Ring 4: Zero-403 Honeypot
+                <div className="p-3 rounded-xl bg-white border border-blue-100 text-xs font-semibold text-slate-800 shadow-xs flex items-center justify-between">
+                  <span>Ring 4: Zero-403 Honeypot</span>
+                  <span className="text-[10px] text-[#0866FF] font-bold">Deception</span>
+                </div>
+                <div className="sm:col-span-2 p-3 rounded-xl bg-emerald-50/90 border border-emerald-200 text-xs font-semibold text-emerald-900 shadow-xs flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>Ring 5: Autonomous Virtual Patcher &amp; Counter-Agent</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-700 font-bold">&lt; 15ms Self-Healing</span>
                 </div>
               </div>
 
               <div className="p-2.5 rounded-lg bg-blue-100/60 text-center text-[11px] font-semibold text-[#0866FF]">
-                Shared policy &amp; event plane: Distributed SQLite Ledger
+                Shared policy &amp; event plane: Distributed SQLite Ledger &amp; Meta Muse Spark Reasoning
               </div>
             </div>
 
@@ -993,6 +1303,29 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
                   </button>
                 </td>
               </tr>
+
+              <tr className="hover:bg-slate-50/50 transition-colors">
+                <td className="py-4 px-6 font-semibold text-slate-900">
+                  Zero-Day Black October Exploits (RCE &amp; Supply-Chain)
+                </td>
+                <td className="py-4 px-6 text-slate-600 text-xs">
+                  Novel AST grammar anomaly &amp; retired route replay
+                </td>
+                <td className="py-4 px-6 text-emerald-700 font-semibold text-xs">
+                  Ring 5: Autonomous Virtual Patcher
+                </td>
+                <td className="py-4 px-6 text-slate-700 font-semibold text-xs tnum">
+                  &lt; 15ms Hot-Patch / 0.0s Downtime
+                </td>
+                <td className="py-4 px-6">
+                  <button
+                    onClick={onLaunchSoc}
+                    className="text-xs font-semibold text-emerald-700 hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>06 →</span>
+                  </button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -1126,7 +1459,7 @@ export const KaryonLandingPage: React.FC<KaryonLandingPageProps> = ({
 
 export const karyon = new KaryonDefensePlane({
   target: 'http://localhost:3000',
-  rings: ['optical', 'polymorphic', 'kv-surgeon', 'honeypot'],
+  rings: ['optical', 'polymorphic', 'kv-surgeon', 'honeypot', 'virtual-patcher'],
   aiModel: 'meta-models/muse-spark-open-1026',
   rotationIntervalSec: 60,
   zero403Mode: true
@@ -1257,7 +1590,7 @@ export default karyon.middleware();`}</code>
             Your AI is evolving. Your defense should, too.
           </h2>
           <p className="text-base text-slate-400 max-w-xl mx-auto">
-            Explore Karyon's four-ring approach to an enterprise AI surface that adapts as fast as the agents around it.
+            Explore Karyon's five-ring approach to an enterprise AI surface that adapts as fast as the agents around it.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -1316,6 +1649,7 @@ export default karyon.middleware();`}</code>
               <li><a href="#rings" className="hover:text-slate-900 transition-colors">Polymorphic Mesh</a></li>
               <li><a href="#rings" className="hover:text-slate-900 transition-colors">Context Surgeon</a></li>
               <li><a href="#rings" className="hover:text-slate-900 transition-colors">Shadow Honeypot</a></li>
+              <li><a href="#rings" className="hover:text-slate-900 transition-colors font-medium text-emerald-600">Autonomous Virtual Patcher</a></li>
             </ul>
           </div>
 
@@ -1323,6 +1657,7 @@ export default karyon.middleware();`}</code>
           <div className="space-y-3">
             <h5 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Explore</h5>
             <ul className="space-y-2 text-xs">
+              <li><a href="#black-october" className="hover:text-slate-900 transition-colors text-rose-600 font-medium">Black October Threat Center</a></li>
               <li><a href="#threats" className="hover:text-slate-900 transition-colors">Threat Matrix</a></li>
               <li><button onClick={onLaunchSoc} className="hover:text-slate-900 transition-colors text-left cursor-pointer">Bento Command Center</button></li>
               <li><button onClick={onGetStarted} className="hover:text-slate-900 transition-colors text-left cursor-pointer">Target Audit View</button></li>
